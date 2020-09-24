@@ -12,7 +12,8 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder {
 
     public CategoryViewHolder(@NonNull View view) {
         super(view);
-        //this view refers to the view that we inflate on the recyclerview, in this case the category_viewholder. this view contains the elements
+        /*this view refers to the view that we inflate on the recyclerview, in this case the category_viewholder.
+        this view contains the elements*/
         txtCategoryNumber= view.findViewById(R.id.category_number_textview);
         txtCategoryName= view.findViewById(R.id.category_name_textview);
     }

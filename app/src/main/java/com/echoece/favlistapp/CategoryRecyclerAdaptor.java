@@ -7,8 +7,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class CategoryRecyclerAdaptor extends RecyclerView.Adapter<CategoryViewHolder> {
-    String[] categories={"hobbies","sports","games","electronic Gadgets","foods","favourite countries","random","gibrish","boo","moo"};
+    //String[] categories={"hobbies","sports","games","electronic Gadgets","foods","favourite countries","random","gibrish","boo","moo"};
+    private ArrayList<Category> categories;
+
+    public CategoryRecyclerAdaptor(ArrayList<Category> categories) {
+        this.categories = categories;
+    }
 
     //this is called when we need to let the recyclerview know about the viewholder
     @NonNull
@@ -30,15 +37,26 @@ public class CategoryRecyclerAdaptor extends RecyclerView.Adapter<CategoryViewHo
 
         return new CategoryViewHolder(view);
     }
+
     //it let us bind the data to the recycler view and let the recycler view show the data that we get from database.
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         holder.getTxtCategoryNumber().setText(Integer.toString(position+1));
-        holder.getTxtCategoryName().setText(categories[position]);
+        holder.getTxtCategoryName().setText(categories.get(position).getName());
     }
+
     //this method let recyclerview know how many items are there in the list
     @Override
     public int getItemCount() {
-        return categories.length;
+        return categories.size();
     }
+
+    //updating the arraylist each time user puts a new value dynamically
+    public void addCategory(Category category){
+        categories.add(category);
+        //notify the adapter about the new item. the position is tricky here. Since the size returns for example 5 . but the index will be 4;
+        notifyItemInserted(categories.size()-1);
+    }
+
+
 }
